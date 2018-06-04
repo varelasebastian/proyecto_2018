@@ -1,0 +1,11 @@
+---
+title: "Text mining bibliométrico"
+output: html_notebook
+---
+
+Importando archivos desde la carpeta del rígido:
+
+```{r}
+load ("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/A_Loc_Econ_Xarg/A_Loc_Econ_Xarg_2007.RData")
+```
+
