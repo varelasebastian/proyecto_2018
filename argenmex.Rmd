@@ -3,9 +3,173 @@ title: "Text mining bibliométrico"
 output: html_notebook
 ---
 
+```{r}
+library(tidyverse)
+```
+
+
+###Data Wrangling
+
 Importando archivos desde la carpeta del rígido:
 
 ```{r}
-load ("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/A_Loc_Econ_Xarg/A_Loc_Econ_Xarg_2007.RData")
+load ("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/M_Loc_Envi_Xmex/M_Loc_Envi_Xmex_2007.RData")
 ```
+
+El chunk de arriba importa todos los data.frames...
+
+```{r}
+ls()
+```
+
+Son 40 data.frames. Creo un id (identificador) para cada dataframe:
+
+```{r}
+
+#Econ. Arg.
+A_Loc_Econ_Xarg_2007 <- mutate(A_Loc_Econ_Xarg_2007,
+identificador = 1)
+
+A_Loc_Econ_Xarg_2008 <- mutate(A_Loc_Econ_Xarg_2008,
+identificador = 2)
+
+A_Loc_Econ_Xarg_2009 <- mutate(A_Loc_Econ_Xarg_2009,
+identificador = 3)
+
+A_Loc_Econ_Xarg_2010 <- mutate(A_Loc_Econ_Xarg_2010,
+identificador = 4)
+
+A_Loc_Econ_Xarg_2011 <- mutate(A_Loc_Econ_Xarg_2011,
+identificador = 5)
+
+A_Loc_Econ_Xarg_2012 <- mutate(A_Loc_Econ_Xarg_2012,
+identificador = 6)
+
+A_Loc_Econ_Xarg_2013 <- mutate(A_Loc_Econ_Xarg_2013,
+identificador = 7)
+
+A_Loc_Econ_Xarg_2014 <- mutate(A_Loc_Econ_Xarg_2014,
+identificador = 8)
+
+A_Loc_Econ_Xarg_2015 <- mutate(A_Loc_Econ_Xarg_2015,
+identificador = 9)
+
+A_Loc_Econ_Xarg_2016 <- mutate(A_Loc_Econ_Xarg_2016,
+identificador = 10)
+
+#Envi Arg.
+A_Loc_Envi_Xarg_2007 <- mutate(A_Loc_Envi_Xarg_2007,
+identificador = 11)
+
+A_Loc_Envi_Xarg_2008 <- mutate(A_Loc_Envi_Xarg_2008,
+identificador = 12)
+
+A_Loc_Envi_Xarg_2009 <- mutate(A_Loc_Envi_Xarg_2009,
+identificador = 13)
+
+A_Loc_Envi_Xarg_2010 <- mutate(A_Loc_Envi_Xarg_2010,
+identificador = 14)
+
+A_Loc_Envi_Xarg_2011 <- mutate(A_Loc_Envi_Xarg_2011,
+identificador = 15)
+
+A_Loc_Envi_Xarg_2012 <- mutate(A_Loc_Envi_Xarg_2012,
+identificador = 16)
+
+A_Loc_Envi_Xarg_2013 <- mutate(A_Loc_Envi_Xarg_2013,
+identificador = 17)
+
+A_Loc_Envi_Xarg_2014 <- mutate(A_Loc_Envi_Xarg_2014,
+identificador = 18)
+
+A_Loc_Envi_Xarg_2015 <- mutate(A_Loc_Envi_Xarg_2015,
+identificador = 19)
+
+A_Loc_Envi_Xarg_2016 <- mutate(A_Loc_Envi_Xarg_2016,
+identificador = 20)
+
+#Econ. Mex.
+
+M_Loc_Econ_Xmex_2007 <- mutate(M_Loc_Econ_Xmex_2007,
+identificador = 21)
+
+M_Loc_Econ_Xmex_2008 <- mutate(M_Loc_Econ_Xmex_2008,
+identificador = 22)
+
+M_Loc_Econ_Xmex_2009 <- mutate(M_Loc_Econ_Xmex_2009,
+identificador = 23)
+
+M_Loc_Econ_Xmex_2010 <- mutate(M_Loc_Econ_Xmex_2010,
+identificador = 24)
+
+M_Loc_Econ_Xmex_2011 <- mutate(M_Loc_Econ_Xmex_2011,
+identificador = 25)
+
+M_Loc_Econ_Xmex_2012 <- mutate(M_Loc_Econ_Xmex_2012,
+identificador = 26)
+
+M_Loc_Econ_Xmex_2013 <- mutate(M_Loc_Econ_Xmex_2013,
+identificador = 27)
+
+M_Loc_Econ_Xmex_2014 <- mutate(M_Loc_Econ_Xmex_2014,
+identificador = 28)
+
+M_Loc_Econ_Xmex_2015 <- mutate(M_Loc_Econ_Xmex_2015,
+identificador = 29)
+
+A_Loc_Envi_Xarg_2016 <- mutate(A_Loc_Envi_Xarg_2016,
+identificador = 30)
+
+#Envi Mex:
+
+M_Loc_Envi_Xmex_2007 <- mutate(M_Loc_Envi_Xmex_2007,
+identificador = 31)
+
+M_Loc_Envi_Xmex_2008 <- mutate(M_Loc_Envi_Xmex_2008,
+identificador = 32)
+
+M_Loc_Envi_Xmex_2009 <- mutate(M_Loc_Envi_Xmex_2009,
+identificador = 33)
+
+M_Loc_Envi_Xmex_2010 <- mutate(M_Loc_Envi_Xmex_2010,
+identificador = 34)
+
+M_Loc_Envi_Xmex_2011 <- mutate(M_Loc_Envi_Xmex_2011,
+identificador = 35)
+
+M_Loc_Envi_Xmex_2012 <- mutate(M_Loc_Envi_Xmex_2012,
+identificador = 36)
+
+M_Loc_Envi_Xmex_2013 <- mutate(M_Loc_Envi_Xmex_2013,
+identificador = 37)
+
+M_Loc_Envi_Xmex_2014 <- mutate(M_Loc_Envi_Xmex_2014,
+identificador = 38)
+
+M_Loc_Envi_Xmex_2015 <- mutate(M_Loc_Envi_Xmex_2015,
+identificador = 39)
+
+A_Loc_Envi_Xarg_2016 <- mutate(A_Loc_Envi_Xarg_2016,
+identificador = 40)
+
+```
+
+Las pego a todas:
+
+```{r}
+total <- bind_rows(A_Loc_Econ_Xarg_2007, A_Loc_Econ_Xarg_2008, A_Loc_Econ_Xarg_2009, A_Loc_Econ_Xarg_2010, A_Loc_Econ_Xarg_2011, A_Loc_Econ_Xarg_2012, A_Loc_Econ_Xarg_2013, A_Loc_Econ_Xarg_2014, A_Loc_Econ_Xarg_2015, A_Loc_Econ_Xarg_2016, A_Loc_Envi_Xarg_2007, A_Loc_Envi_Xarg_2008, A_Loc_Envi_Xarg_2009, A_Loc_Envi_Xarg_2010, A_Loc_Envi_Xarg_2011, A_Loc_Envi_Xarg_2012, A_Loc_Envi_Xarg_2013, A_Loc_Envi_Xarg_2014, A_Loc_Envi_Xarg_2015, A_Loc_Envi_Xarg_2016, M_Loc_Econ_Xmex_2007, M_Loc_Econ_Xmex_2008, M_Loc_Econ_Xmex_2009, M_Loc_Econ_Xmex_2010, M_Loc_Econ_Xmex_2011, M_Loc_Econ_Xmex_2012, M_Loc_Econ_Xmex_2013, M_Loc_Econ_Xmex_2014, M_Loc_Econ_Xmex_2015, M_Loc_Econ_Xmex_2016, M_Loc_Envi_Xmex_2007, M_Loc_Envi_Xmex_2008, M_Loc_Envi_Xmex_2009, M_Loc_Envi_Xmex_2010, M_Loc_Envi_Xmex_2011, M_Loc_Envi_Xmex_2012, M_Loc_Envi_Xmex_2013, M_Loc_Envi_Xmex_2014, M_Loc_Envi_Xmex_2015, M_Loc_Envi_Xmex_2016, .id = NULL)
+```
+
+La transformo en tibble:
+
+```{r}
+consolidada <- as_tibble(total)
+```
+
+Listo.
+
+##Análisis exploratorio:
+
+
+
 
