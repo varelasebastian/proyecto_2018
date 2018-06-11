@@ -166,10 +166,98 @@ La transformo en tibble:
 consolidada <- as_tibble(total)
 ```
 
-Listo.
+Elimino las bases anteriores del environment:
+```{r}
+rm(r, total, A_Loc_Econ_Xarg_2007, A_Loc_Econ_Xarg_2008, A_Loc_Econ_Xarg_2009, A_Loc_Econ_Xarg_2010, A_Loc_Econ_Xarg_2011, A_Loc_Econ_Xarg_2012, A_Loc_Econ_Xarg_2013, A_Loc_Econ_Xarg_2014, A_Loc_Econ_Xarg_2015, A_Loc_Econ_Xarg_2016, A_Loc_Envi_Xarg_2007, A_Loc_Envi_Xarg_2008, A_Loc_Envi_Xarg_2009, A_Loc_Envi_Xarg_2010, A_Loc_Envi_Xarg_2011, A_Loc_Envi_Xarg_2012, A_Loc_Envi_Xarg_2013, A_Loc_Envi_Xarg_2014, A_Loc_Envi_Xarg_2015, A_Loc_Envi_Xarg_2016, M_Loc_Econ_Xmex_2007, M_Loc_Econ_Xmex_2008, M_Loc_Econ_Xmex_2009, M_Loc_Econ_Xmex_2010, M_Loc_Econ_Xmex_2011, M_Loc_Econ_Xmex_2012, M_Loc_Econ_Xmex_2013, M_Loc_Econ_Xmex_2014, M_Loc_Econ_Xmex_2015, M_Loc_Econ_Xmex_2016, M_Loc_Envi_Xmex_2007, M_Loc_Envi_Xmex_2008, M_Loc_Envi_Xmex_2009, M_Loc_Envi_Xmex_2010, M_Loc_Envi_Xmex_2011, M_Loc_Envi_Xmex_2012, M_Loc_Envi_Xmex_2013, M_Loc_Envi_Xmex_2014, M_Loc_Envi_Xmex_2015, M_Loc_Envi_Xmex_2016)
+```
+
+Veamos si hay duplicados:
+
+```{r}
+distinct(consolidada)
+```
+Se deduce de arriba que hay 11 duplicados
+
+al parecer hay 702 duplicados, cuales son? Son estos de abajo, a algunos no los agarra distinct() por la variable identificador creada por mí.
+
+```{r}
+consolidada %>%        
+group_by(AB) %>% 
+filter(n()>1)
+```
+Está tomando como duplicados a los que tienen AB en blanco al parecer... pongo otra variable (AU)
+
+```{r}
+consolidada %>%        
+group_by(TI, AU, DE, JI, AB, RP, UT) %>% 
+filter(n()>1)
+```
+
+Detecta 232 duplicados...
+
+#ACA PERDES VARIABLES!!!! SÓLO RETIENE LAS QUE ESPECIFICÁS! ESPECIFICÁ TODAS MENOS IDENTIFICADOR...
+```{r}
+consolidada <- distinct (consolidada, TI, AU, DE, JI, AB, RP, UT) 
+```
+Borró 116... en fin... me quedo con esto... ahora hay 11327
+
+Repetimos:
+```{r}
+consolidada %>%        
+group_by(TI, AU, DE, JI, AB, RP, UT) %>% 
+filter(n()>1)
+```
+
+OK. LIsto.
 
 ##Análisis exploratorio:
 
+¿Qué son las variables?
+
+AU: autor
+
+Ti: título
+
+So, fuente (revista)
+
+JI, titulo abreviado de la revista
+
+DT: tipo de documento
+
+DE descriptor, alabras claves autor?
+
+ID: descriptor, alabras claves sistema?
+
+Luego Claudia me la envía completa...
+
+
+###Objetivos: 
+
+1. Explorar un tema particular, ejemplo: Argentina y Mexico comparacion sobre temas de medio ambiente.
+
+Hacia adentro, lo que los argentinos investigan sobre medioambiente, porque parece "Argentina" en el titulo o keyword). La produccion del país para solucionar los temas del país.
+
+2. Usar LDA para clasificar artículos en los 4 cestos: Env. Arg; Env. Méx; Eco. Arg. y Eco. Méx.
+
+Tal vez tendría que quedarme con el dataset y poner eval=false a todo lo de arriba, se queda sin RAM la PC... y sacar los de Economía...
+
+```{r}
+write_rds(consolidada, "C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada_1.rds")
+
+consolidada2 <- read_rds("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada_1.rds")
+```
+
+("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra
+
+#FIN-HASTA ACA
+
+
+```{r}
+library(tidytext)
+
+consolidada1 <- consolidada %>%
+unnest_tokens(autor, AU)
+```
 
 
 
