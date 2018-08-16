@@ -1,6 +1,6 @@
 ---
 title: "Text mining bibliométrico"
-output: html_notebook
+
 ---
 
 ```{r}
@@ -12,50 +12,50 @@ library(tidyverse)
 
 Importando archivos desde la carpeta del rígido:
 
-```{r}
+```{r, eval=FALSE}
 load ("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/M_Loc_Envi_Xmex/M_Loc_Envi_Xmex_2007.RData")
 ```
 
 El chunk de arriba importa todos los data.frames...
 
-```{r}
+```{r , eval=FALSE}
 ls()
 ```
 
 Son 40 data.frames. Creo un id (identificador) para cada dataframe:
 
-```{r}
+```{r, eval=FALSE}
 
 #Econ. Arg.
 A_Loc_Econ_Xarg_2007 <- mutate(A_Loc_Econ_Xarg_2007,
-identificador = 1)
+identificador = 100)
 
 A_Loc_Econ_Xarg_2008 <- mutate(A_Loc_Econ_Xarg_2008,
-identificador = 2)
+identificador = 200)
 
 A_Loc_Econ_Xarg_2009 <- mutate(A_Loc_Econ_Xarg_2009,
-identificador = 3)
+identificador = 300)
 
 A_Loc_Econ_Xarg_2010 <- mutate(A_Loc_Econ_Xarg_2010,
-identificador = 4)
+identificador = 400)
 
 A_Loc_Econ_Xarg_2011 <- mutate(A_Loc_Econ_Xarg_2011,
-identificador = 5)
+identificador = 500)
 
 A_Loc_Econ_Xarg_2012 <- mutate(A_Loc_Econ_Xarg_2012,
-identificador = 6)
+identificador = 600)
 
 A_Loc_Econ_Xarg_2013 <- mutate(A_Loc_Econ_Xarg_2013,
-identificador = 7)
+identificador = 700)
 
 A_Loc_Econ_Xarg_2014 <- mutate(A_Loc_Econ_Xarg_2014,
-identificador = 8)
+identificador = 800)
 
 A_Loc_Econ_Xarg_2015 <- mutate(A_Loc_Econ_Xarg_2015,
-identificador = 9)
+identificador = 900)
 
 A_Loc_Econ_Xarg_2016 <- mutate(A_Loc_Econ_Xarg_2016,
-identificador = 10)
+identificador = 1000)
 
 #Envi Arg.
 A_Loc_Envi_Xarg_2007 <- mutate(A_Loc_Envi_Xarg_2007,
@@ -91,34 +91,34 @@ identificador = 20)
 #Econ. Mex.
 
 M_Loc_Econ_Xmex_2007 <- mutate(M_Loc_Econ_Xmex_2007,
-identificador = 21)
+identificador = 2100)
 
 M_Loc_Econ_Xmex_2008 <- mutate(M_Loc_Econ_Xmex_2008,
-identificador = 22)
+identificador = 2200)
 
 M_Loc_Econ_Xmex_2009 <- mutate(M_Loc_Econ_Xmex_2009,
-identificador = 23)
+identificador = 2300)
 
 M_Loc_Econ_Xmex_2010 <- mutate(M_Loc_Econ_Xmex_2010,
-identificador = 24)
+identificador = 2400)
 
 M_Loc_Econ_Xmex_2011 <- mutate(M_Loc_Econ_Xmex_2011,
-identificador = 25)
+identificador = 2500)
 
 M_Loc_Econ_Xmex_2012 <- mutate(M_Loc_Econ_Xmex_2012,
-identificador = 26)
+identificador = 2600)
 
 M_Loc_Econ_Xmex_2013 <- mutate(M_Loc_Econ_Xmex_2013,
-identificador = 27)
+identificador = 2700)
 
 M_Loc_Econ_Xmex_2014 <- mutate(M_Loc_Econ_Xmex_2014,
-identificador = 28)
+identificador = 2800)
 
 M_Loc_Econ_Xmex_2015 <- mutate(M_Loc_Econ_Xmex_2015,
-identificador = 29)
+identificador = 2900)
 
 A_Loc_Envi_Xarg_2016 <- mutate(A_Loc_Envi_Xarg_2016,
-identificador = 30)
+identificador = 3000)
 
 #Envi Mex:
 
@@ -156,108 +156,493 @@ identificador = 40)
 
 Las pego a todas:
 
-```{r}
+```{r, eval=FALSE}
 total <- bind_rows(A_Loc_Econ_Xarg_2007, A_Loc_Econ_Xarg_2008, A_Loc_Econ_Xarg_2009, A_Loc_Econ_Xarg_2010, A_Loc_Econ_Xarg_2011, A_Loc_Econ_Xarg_2012, A_Loc_Econ_Xarg_2013, A_Loc_Econ_Xarg_2014, A_Loc_Econ_Xarg_2015, A_Loc_Econ_Xarg_2016, A_Loc_Envi_Xarg_2007, A_Loc_Envi_Xarg_2008, A_Loc_Envi_Xarg_2009, A_Loc_Envi_Xarg_2010, A_Loc_Envi_Xarg_2011, A_Loc_Envi_Xarg_2012, A_Loc_Envi_Xarg_2013, A_Loc_Envi_Xarg_2014, A_Loc_Envi_Xarg_2015, A_Loc_Envi_Xarg_2016, M_Loc_Econ_Xmex_2007, M_Loc_Econ_Xmex_2008, M_Loc_Econ_Xmex_2009, M_Loc_Econ_Xmex_2010, M_Loc_Econ_Xmex_2011, M_Loc_Econ_Xmex_2012, M_Loc_Econ_Xmex_2013, M_Loc_Econ_Xmex_2014, M_Loc_Econ_Xmex_2015, M_Loc_Econ_Xmex_2016, M_Loc_Envi_Xmex_2007, M_Loc_Envi_Xmex_2008, M_Loc_Envi_Xmex_2009, M_Loc_Envi_Xmex_2010, M_Loc_Envi_Xmex_2011, M_Loc_Envi_Xmex_2012, M_Loc_Envi_Xmex_2013, M_Loc_Envi_Xmex_2014, M_Loc_Envi_Xmex_2015, M_Loc_Envi_Xmex_2016, .id = NULL)
 ```
 
 La transformo en tibble:
 
-```{r}
+```{r, eval=FALSE}
 consolidada <- as_tibble(total)
 ```
 
 Elimino las bases anteriores del environment:
-```{r}
+```{r, eval=FALSE}
 rm(r, total, A_Loc_Econ_Xarg_2007, A_Loc_Econ_Xarg_2008, A_Loc_Econ_Xarg_2009, A_Loc_Econ_Xarg_2010, A_Loc_Econ_Xarg_2011, A_Loc_Econ_Xarg_2012, A_Loc_Econ_Xarg_2013, A_Loc_Econ_Xarg_2014, A_Loc_Econ_Xarg_2015, A_Loc_Econ_Xarg_2016, A_Loc_Envi_Xarg_2007, A_Loc_Envi_Xarg_2008, A_Loc_Envi_Xarg_2009, A_Loc_Envi_Xarg_2010, A_Loc_Envi_Xarg_2011, A_Loc_Envi_Xarg_2012, A_Loc_Envi_Xarg_2013, A_Loc_Envi_Xarg_2014, A_Loc_Envi_Xarg_2015, A_Loc_Envi_Xarg_2016, M_Loc_Econ_Xmex_2007, M_Loc_Econ_Xmex_2008, M_Loc_Econ_Xmex_2009, M_Loc_Econ_Xmex_2010, M_Loc_Econ_Xmex_2011, M_Loc_Econ_Xmex_2012, M_Loc_Econ_Xmex_2013, M_Loc_Econ_Xmex_2014, M_Loc_Econ_Xmex_2015, M_Loc_Econ_Xmex_2016, M_Loc_Envi_Xmex_2007, M_Loc_Envi_Xmex_2008, M_Loc_Envi_Xmex_2009, M_Loc_Envi_Xmex_2010, M_Loc_Envi_Xmex_2011, M_Loc_Envi_Xmex_2012, M_Loc_Envi_Xmex_2013, M_Loc_Envi_Xmex_2014, M_Loc_Envi_Xmex_2015, M_Loc_Envi_Xmex_2016)
 ```
 
 Veamos si hay duplicados:
 
-```{r}
-distinct(consolidada)
+NO CORRER!
+```{r, eval=FALSE}
+#distinct(consolidada)
 ```
 Se deduce de arriba que hay 11 duplicados
 
-al parecer hay 702 duplicados, cuales son? Son estos de abajo, a algunos no los agarra distinct() por la variable identificador creada por mí.
+Se ve abajo que al parecer hay 702 duplicados, cuales son? Son estos de abajo, a algunos no los agarra distinct() por la variable identificador creada por mí.
 
-```{r}
-consolidada %>%        
+NO CORRER!
+```{r, eval=FALSE}
+#consolidada %>%        
 group_by(AB) %>% 
 filter(n()>1)
 ```
-Está tomando como duplicados a los que tienen AB en blanco al parecer... pongo otra variable (AU)
+Está tomando como duplicados a los que tienen AB en blanco al parecer... pongo otras variable adicionales:
 
-```{r}
-consolidada %>%        
+NO CORRER!
+```{r, eval=FALSE}
+#consolidada %>%        
 group_by(TI, AU, DE, JI, AB, RP, UT) %>% 
 filter(n()>1)
 ```
 
-Detecta 232 duplicados...
+Detecta 232 duplicados... listo me quedo con este dataset... la RAM está que explota... No, lo que explota en realidad es el uso que windows 10 hace del disco duro, con cosas que corren en segundo plano (aunque según veo explota la ram y luego el rígido, y se tilda)
 
-#ACA PERDES VARIABLES!!!! SÓLO RETIENE LAS QUE ESPECIFICÁS! ESPECIFICÁ TODAS MENOS IDENTIFICADOR...
-```{r}
-consolidada <- distinct (consolidada, TI, AU, DE, JI, AB, RP, UT) 
+Lo que sigue sólo retiene la variables mencionadas, se pierden las otras. Tal vez hay que ir hacia análisis seleccionando previamente variables específicas.
+
+NO CORRER!
+```{r, eval=FALSE}
+#consolidada <- distinct (consolidada, TI, AU, DE, JI, AB, RP, UT) 
 ```
-Borró 116... en fin... me quedo con esto... ahora hay 11327
+Borró 116... en fin... me quedo con esto... ahora hay 11327, pero pierdo variables...
 
-Repetimos:
-```{r}
-consolidada %>%        
-group_by(TI, AU, DE, JI, AB, RP, UT) %>% 
+Repetimos el proceso con todas para tener la base total sin duplicados:
+No funca, explota...
+```{r, eval=FALSE}
+#consolidada %>%        
+group_by(AU,TI,SO,JI, DT, DE,ID,AB,C1,RP,CR,TC,PY,UT,DB) %>% 
 filter(n()>1)
 ```
 
-OK. LIsto.
+Esto también explota LPM...
+NO CORRER!
+```{r, eval=FALSE}
+#consolidada <- distinct (consolidada, AU,TI,SO,JI, DT, DE,ID,AB,C1,RP,CR,TC,PY,UT,DB)
+
+```
+
+Y si pregunto en Fahce si me permiten usar servidores con databases?, y trabajo con la data ahí?
+
+Otra es filtrar para quedarme sólo con los de medio ambiente de Arg y Mex:
+
+Pero cuales son de Arg. y cuales de México?
+
+de la 11 a la 20 son medio ambiente Argentina y de la 31 a la 40 medio ambiente México
+
+```{r, eval=FALSE}
+consolidada <- filter(consolidada, identificador < 100)
+```
+
+Pais del artículo:
+
+```{r}
+consolidada <- within(consolidada,{
+país <- NA
+país [identificador < 31] <- "Argentina"
+país [identificador > 30] <- "México"})
+```
+
+
+Ahora sí puedo sacar los duplicados:
+```{r, eval=FALSE}
+consolidada1 <- distinct (consolidada, AU,TI,SO,JI, DT, DE,ID,AB,C1,RP,CR,TC,PY,UT,DB)
+
+#Perdí las variables identificador y país...
+#Puedo con alguna función relacional recuperar... y ver el mismatch con un antijoin
+
+consolidada %>% 
+anti_join(consolidada1, by = NULL) 
+
+#No encuentra casos... que raro... quedate con consolidada
+
+rm(consolidada1)
+```
+
+
+NO CORRER!
+```{r, eval=FALSE}
+#distinct(consolidada)
+```
+
+voy a guardar el dataset:
+
+NO CORRER!
+```{r}
+#write_rds(consolidada, "C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada.rds")
+```
+
+Borro la del environment:
+
+```{r, eval=FALSE}
+rm(consolidada)
+```
+
+NO CORRER LO ANTERIOR; ARRANCA DE ACA
 
 ##Análisis exploratorio:
 
+```{r}
+library(tidyverse)
+```
+
+
+importo dataset final:
+```{r}
+envi1 <- read_rds("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada.rds")
+```
+
+
 ¿Qué son las variables?
 
-AU: autor
+AU: Authors
 
-Ti: título
+Ti: Document Title
 
-So, fuente (revista)
+SO, Publication Name
 
-JI, titulo abreviado de la revista
+JI, ISO Source Abbreviation
 
-DT: tipo de documento
+DT: Document Type
 
-DE descriptor, alabras claves autor?
+DE Author Keywords
 
-ID: descriptor, alabras claves sistema?
+ID: Keywords Plus®
 
-Luego Claudia me la envía completa...
+AB: Abstract
 
+C1: Author Address
+
+RP: Reprint Address
+
+CR Cited References
+
+TC: Web of Science Core Collection Times Cited Count
+
+PY: Year Published
+
+UT: Accession Number
+
+DB: 
+
+Web of Science Core Collection Field Tags. These two-character field tags identify fields in records that you e-mail, export, or save. They cover articles, books, and conference proceedings.
 
 ###Objetivos: 
 
 1. Explorar un tema particular, ejemplo: Argentina y Mexico comparacion sobre temas de medio ambiente.
 
-Hacia adentro, lo que los argentinos investigan sobre medioambiente, porque parece "Argentina" en el titulo o keyword). La produccion del país para solucionar los temas del país.
+Hacia adentro, lo que los argentinos investigan sobre medioambiente, porque aparece "Argentina" en el titulo o keyword). La produccion del país para solucionar los temas del país.
 
 2. Usar LDA para clasificar artículos en los 4 cestos: Env. Arg; Env. Méx; Eco. Arg. y Eco. Méx.
 
-Tal vez tendría que quedarme con el dataset y poner eval=false a todo lo de arriba, se queda sin RAM la PC... y sacar los de Economía...
+
+Primero voy a trabajar sobre los abstracts.
 
 ```{r}
-write_rds(consolidada, "C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada_1.rds")
+#Voy a sacar el 1 (sale como una palabra abajo)
 
-consolidada2 <- read_rds("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/consolidada_1.rds")
-```
-
-("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra
-
-#FIN-HASTA ACA
-
-
-```{r}
 library(tidytext)
 
-consolidada1 <- consolidada %>%
-unnest_tokens(autor, AU)
+mipropio_stop_words <- bind_rows(data_frame(word = c("1", "2", "3", "4", "5", "6", "7", "8", "9"),
+                                    lexicon = c("custom")),
+                                 stop_words)
+mipropio_stop_words
+
+count(stop_words, lexicon)
+
+count(mipropio_stop_words, lexicon)
+                                 
+                                 
+```
+
+we need to both break the text into individual tokens (a process called tokenization) and transform it to a tidy data structure. To do this, we use tidytext’s unnest_tokens()
+function.The default tokenizing is for words, but other options include characters, n-grams, sentences, lines, paragraphs, or separation around a regex pattern.
+```{r}
+terminos <- envi1 %>%
+unnest_tokens(word, AB)
+terminos
+
+#por qué sale toda la matriz?, voy a seleccionar términos, país y abstract sólamente
+
+terminos <- envi1 %>%
+  group_by(país) %>% 
+  select(identificador, país, AB) %>% 
+unnest_tokens(word, AB) %>% 
+  anti_join(mipropio_stop_words) %>% 
+  count(word, sort = TRUE) 
+  
+terminos
+
+#desagrupo terminos:
+
+terminos <- terminos %>% 
+  ungroup()
+
+terminos
+
+```
+
+```{r}
+count(terminos, word) 
+
+#salen con Unicode Character ... no se por que... sólo son algunas palabras poco frecuentes que fueron mal leídas, probablemente son sólo caracteres...
+ 
 ```
 
 
 
+
+```{r}
+#gráfico Mexico
+
+g1 <- terminos %>% 
+  filter(país == "México") %>% 
+ top_n(10) %>% 
+  mutate(word = reorder(word, n)) %>% 
+  ggplot(aes(word, n)) +
+  geom_col() +
+ labs(title = "México",  x = "", y ="" )+
+    coord_flip()
+
+
+ #Grafico Argentina
+g2 <- terminos %>% 
+  filter(país == "Argentina") %>% 
+ top_n(10) %>% 
+  mutate(word = reorder(word, n)) %>% 
+  ggplot(aes(word, n)) +
+   geom_col() +
+ labs(title = "Argentina",  x = "", y ="" )+
+  coord_flip()
+
+
+#Pego los dos gráficos:
+
+library(grid)
+library(gridExtra)
+grid.arrange(g1, g2, ncol = 2)
+
+```
+
+```{r}
+count(terminos, país)
+```
+
+
+
+```{r}
+library(wordcloud)
+```
+
+```{r}
+#Otro intento:
+
+library(wordcloud)
+
+set.seed(1234)
+wordcloud(words = terminos$word, freq  = terminos$n, min.freq = 1,
+          max.words=50, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+#Terminos argentinos:
+
+nubearg <- terminos %>% 
+  filter(país == "Argentina")
+
+set.seed(1234)
+ wordcloud(words = nubearg$word, freq  = nubearg$n, min.freq = 1,
+          max.words=50, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+ 
+ 
+```
+
+```{r}
+
+nubemex<- terminos %>% 
+  filter(país == "México")
+
+set.seed(1234)
+wordcloud(words = nubemex$word, freq  = nubemex$n, min.freq = 1,
+          max.words=50, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+the tf-idf statistic (term frequency times inverse document frequency), a quantity used for identifying terms that are especially important to a particular document.
+
+The statistic tf-idf is intended to measure how important a word is to a document in a collection (or corpus) of documents, for example, to one novel in a collection of novels or to one website in a collection of websites.
+
+The idea of tf-idf is to find the important words for the content of each document by decreasing the weight for commonly used words and increasing the weight for words that are not used very much in a collection or corpus of documents.
+
+```{r}
+paraitf <- terminos %>%
+group_by(país)
+
+paraitf <- terminos %>%
+bind_tf_idf(país, word, n)
+paraitf
+
+
+paraitf <- paraitf %>%
+arrange(desc(tf_idf)) %>%
+mutate(word = factor(word, levels = rev(unique(word)))) %>%
+mutate(país = factor(país))
+```
+
+
+```{r}
+paraitf %>%
+  filter(n >20)
+```
+
+
+```{r}
+paraitf %>%
+  group_by(país) %>% 
+  filter(n > 10) %>% 
+  count(país)
+```
+
+
+
+```{r}
+#Grafico
+#no hay caso...
+#El problema es que el valor de tf_idf se repite mucho en ambos casos... por eso las barras tienen el mismo largo...
+
+paraitf %>%
+  group_by(país) %>%
+   filter(n > 100) %>%     ##Palabras que se repitan 100 veces en cada corpus, sino son muchas
+  top_n(15, tf_idf) %>%
+ungroup() %>%
+mutate(word = reorder(word, tf_idf)) %>%
+ggplot(aes(word, tf_idf, fill = país)) +
+geom_col(show.legend = FALSE) +
+labs(x = NULL, y = "tf-idf") +
+facet_wrap(~país, ncol = 2, scales = "free") +
+coord_flip()
+```
+
+
+
+Tokenizing by n-gram (2), bigramas.
+Introducing n-grams and how to analyze word networks in text using the widyr and
+ggraph packages.
+We may be interested in visualizing all of the relationships among words simultaneously, rather than just the top few at a time. As one common visualization, we can arrange the words into a network, or “graph.” Here we’ll be referring to a “graph” not in the sense of a visualization, but as a combination of connected nodes.
+
+```{r}
+#creo la matriz con los bigramas, tiene todas las variables
+#No correr, cargarla desde abajo, está en el rígido!
+
+
+#terminosbigram<- envi1 %>%
+unnest_tokens(bigram, AB , token = "ngrams", n = 2)
+terminosbigram
+```
+
+```{r}
+#La guardo, tarda mucho en generarse y explota la memoria
+#No correr!
+
+#write_rds(terminosbigram, "C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/terminosbigram.rds")
+```
+
+
+```{r}
+#La cargo, tarda un poco menos...
+
+terminosbigram <- read_rds("C:/Users/User/Desktop/Seba/Datasets enraizados. No tocar ni mover/pict_sandra/terminosbigram.rds")
+```
+
+
+```{r}
+terminosbigram <-  terminosbigram  %>%
+count(bigram, sort = TRUE)
+terminosbigram
+
+#se ven los bigramas, se requiere sacar las stopwords
+
+```
+
+```{r}
+mipropio_stop_words <- bind_rows(data_frame(word = c("1", "2", "3", "4", "5", "6", "7", "8", "9"),
+                                    lexicon = c("custom")),
+                                 stop_words)
+mipropio_stop_words
+
+count(stop_words, lexicon)
+
+count(mipropio_stop_words, lexicon)
+```
+
+
+
+```{r}
+
+#separo los términos... cambia el nombre...están sorteados los términos segun n...
+#Hay que sacar las stopwords...
+
+terminosbigram1 <- terminosbigram %>%
+separate(bigram, c("word1", "word2"), sep = " ")
+terminosbigram1
+```
+
+```{r}
+
+#saco las stopwords... quedan los bigramas limpios
+
+terminosbigram1 <- terminosbigram1 %>%
+filter(!word1 %in% mipropio_stop_words$word) %>%
+filter(!word2 %in% mipropio_stop_words$word)
+terminosbigram1
+```
+
+```{r}
+#los vuelvo a unir...aca habia que llamarlo terminosbigram2...
+
+terminosbigram2 <- terminosbigram1 %>%
+unite(bigram, word1, word2, sep = " ")
+terminosbigram2
+```
+
+```{r}
+library(igraph)
+```
+  
+```{r}
+
+#filter for only relatively common combinations
+#Es un objeto IGRAPH
+
+terminosgrahp <- terminosbigram1 %>%
+filter(n > 130) %>%
+graph_from_data_frame()
+```
+  
+```{r}
+#acá se trabó
+
+library(ggraph)
+set.seed(2017)
+ggraph(terminosgrahp, layout = "fr") +
+geom_edge_link() +
+geom_node_point() +
+geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+```
+
+
+```{r}
+set.seed(2016)
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+ggraph(terminosgrahp, layout = "fr") +
+geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+arrow = a, end_cap = circle(.07, 'inches')) +
+geom_node_point(color = "lightblue", size = 5) +
+geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+theme_void()
+```
+
+Otras posibles aplicaciones de text mining:
+
+sentiment analysis, topic modeling, clustering, análisis de correspondiencias.
